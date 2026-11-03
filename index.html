@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gustavo Henrique Barros Matiello | Portfólio de Tecnologia</title>
+  <meta name="description" content="Portfólio profissional de Gustavo Henrique Barros Matiello - Estudante de Tecnologia da Informação e Desenvolvedor em formação.">
+  <link rel="icon" type="image/png" href="gustavo_profile.png">
+
+  <!-- Google Fonts: Inter, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              900: '#3b0764',
+              950: '#1b0a2a',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="src/css/styles.css">
+
+  <!-- React 18, ReactDOM & Babel for standalone browser execution -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="antialiased selection:bg-purple-600 selection:text-white">
+
+  <!-- React Application Mounting Root -->
+  <div id="root"></div>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // --- DATA ---
+    const portfolioData = {
+      personal: {
+        name: "Gustavo Henrique Barros Matiello",
+        shortName: "Gustavo Matiello",
+        initials: "GH",
+        age: 17,
+        role: "Estudante de Tecnologia da Informação | Desenvolvedor em formação",
+        location: "Rua Loja Maçônica Independente, 918 – Campinas, SP",
+        phone: "(19) 99876-3179",
+        phoneRaw: "5519998763179",
+        email: "gustavohenriquebm3@gmail.com",
+        avatar: "gustavo_profile.png",
+        statusBadge: "Disponível para oportunidades & estágio",
+        objective: "Busco oportunidades para aplicar e desenvolver meus conhecimentos na área de Tecnologia da Informação, contribuindo com responsabilidade, vontade de aprender e proatividade em um ambiente profissional.",
+        bio: "Meu nome é Gustavo Henrique Barros Matiello, tenho 17 anos e atualmente estou cursando o Ensino Médio com ênfase em Tecnologia da Informação no Colégio Raphael Di Santo. Também estou estudando inglês para ampliar minhas habilidades linguísticas e profissionais. Tenho interesse em tecnologia, programação, desenvolvimento web, montagem e manutenção de computadores, fotografia, edição de vídeos e pilotagem de drones. Sou uma pessoa responsável, dedicada, organizada e com facilidade para aprender novas tecnologias."
+      },
+      academic: {
+        institution: "Colégio Raphael Di Santo",
+        degree: "Ensino Médio com ênfase em Tecnologia da Informação",
+        status: "Cursando",
+        completionYear: "Previsão de conclusão: 2027",
+        description: "Formação técnica integrada combinando a base curricular com disciplinas especializadas em algoritmos, lógica computacional, desenvolvimento de software, banco de dados e redes."
+      },
+      courses: [
+        {
+          title: "Curso de Edição de Vídeo",
+          category: "Criatividade & Mídia",
+          description: "Técnicas de corte, ritmo narrativo, transições, tratamento de cor, sincronização de áudio e renderização otimizada para diferentes mídias.",
+          icon: "🎬"
+        },
+        {
+          title: "Curso de Fotografia",
+          category: "Criatividade & Mídia",
+          description: "Composição visual, regras de enquadramento, balanço de branco, abertura, tempo de exposição (ISO) e sensibilidade estética na captura de imagens.",
+          icon: "📸"
+        },
+        {
+          title: "Curso de Pilotagem de Drone",
+          category: "Tecnologia & Operação",
+          description: "Controle de voo manual e assistido, planejamento de rotas, filmagem aérea estável, procedimentos de segurança e regulamentação.",
+          icon: "🛸"
+        },
+        {
+          title: "Conhecimentos em HTML, CSS, React e Java",
+          category: "Programação & Web",
+          description: "Estruturação semântica de páginas, estilização moderna e responsiva, componentização de interfaces com React e fundamentos de POO com Java.",
+          icon: "💻"
+        },
+        {
+          title: "Montagem e Manutenção Básica de Computadores",
+          category: "Hardware & Suporte",
+          description: "Identificação de componentes, arquitetura de hardware, montagem de gabinetes, cabeamento, substituição de peças e diagnósticos de funcionamento.",
+          icon: "⚙️"
+        }
+      ],
+      skillCategories: [
+        {
+          id: "programming",
+          name: "Programação & Desenvolvimento Web",
+          badge: "Software & Web",
+          description: "Conhecimentos sólidos em lógica computacional, estruturação de interfaces modernas e arquitetura orientada a objetos.",
+          skills: [
+            {
+              name: "HTML5 & CSS3",
+              description: "Semântica web, acessibilidade, Flexbox, Grid e design totalmente responsivo.",
+              tags: ["Semântica", "Flexbox", "CSS Grid", "Responsividade"]
+            },
+            {
+              name: "React",
+              description: "Criação de componentes reutilizáveis, gerenciamento de estado e interfaces reativas modernas.",
+              tags: ["Componentização", "Hooks", "UI Moderna", "Single Page Apps"]
+            },
+            {
+              name: "JavaScript",
+              description: "Lógica de programação, manipulação dinâmica do DOM, consumo de APIs e eventos interativos.",
+              tags: ["ES6+", "Async/Await", "DOM", "Interatividade"]
+            },
+            {
+              name: "Java",
+              description: "Fundamentos de Programação Orientada a Objetos (POO), classes, métodos e boas práticas de estruturação.",
+              tags: ["POO", "Tipagem Estática", "Lógica", "Back-end"]
+            }
+          ]
+        },
+        {
+          id: "hardware",
+          name: "Tecnologia & Conhecimentos Técnicos",
+          badge: "Hardware & Sistemas",
+          description: "Habilidades práticas na parte física dos computadores e compreensão do ecossistema computacional.",
+          skills: [
+            {
+              name: "Montagem de Computadores",
+              description: "Escolha criteriosa de hardware compatível, instalação de placas-mãe, processadores, memórias e gerenciamento de cabos.",
+              tags: ["Hardware", "Cable Management", "Setup", "Compatibilidade"]
+            },
+            {
+              name: "Manutenção Preventiva e Corretiva",
+              description: "Limpeza técnica, troca de pasta térmica, identificação de falhas e substituição de peças defeituosas.",
+              tags: ["Diagnóstico", "Limpeza", "Reparo Básico", "Otimização"]
+            },
+            {
+              name: "Sistemas & Softwares",
+              description: "Formatação, instalação de sistemas operacionais (Windows), drivers e softwares essenciais para produtividade.",
+              tags: ["Instalação", "Drivers", "Configuração", "Windows"]
+            }
+          ]
+        },
+        {
+          id: "creativity",
+          name: "Criatividade & Audiovisual",
+          badge: "Multimídia & Arte",
+          description: "Capacidade de expressar ideias com forte impacto visual através de câmeras, enquadramentos e pós-produção.",
+          skills: [
+            {
+              name: "Edição de Vídeos",
+              description: "Edição dinâmica com cortes precisos, correção de cor, efeitos de transição e sincronia musical envolvente.",
+              tags: ["Timeline", "Cortes Dinâmicos", "Áudio", "Pós-Produção"]
+            },
+            {
+              name: "Fotografia",
+              description: "Domínio prático de luz, contraste, regra dos terços, perspectiva e sensibilidade para capturar momentos únicos.",
+              tags: ["Composição", "Iluminação", "Perspectiva", "Câmera"]
+            },
+            {
+              name: "Storytelling Visual",
+              description: "Concepção de narrativas visuais claras para apresentações, mídias e projetos de design.",
+              tags: ["Comunicação", "Estética", "Narrativa"]
+            }
+          ]
+        },
+        {
+          id: "drone_soft",
+          name: "Pilotagem de Drone & Competências",
+          badge: "Operação & Conduta",
+          description: "Domínio operacional em equipamentos avançados somado a características profissionais indispensáveis.",
+          skills: [
+            {
+              name: "Pilotagem de Drones",
+              description: "Operação segura de drones, controle espacial de voo, captação de imagens aéreas panorâmicas e estabilizadas.",
+              tags: ["Voo Estável", "Captação Aérea", "Segurança", "Cinemática"]
+            },
+            {
+              name: "Facilidade para Aprender Novas Tecnologias",
+              description: "Entusiasmo constante e capacidade de absorver novas linguagens, frameworks e ferramentas com agilidade.",
+              tags: ["Autoaprendizado", "Curiosidade", "Evolução Contínua"]
+            },
+            {
+              name: "Organização e Responsabilidade",
+              description: "Comprometimento com prazos, organização de arquivos e código, ética profissional e dedicação a cada projeto.",
+              tags: ["Comprometimento", "Disciplina", "Pontualidade", "Proatividade"]
+            }
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: "direlands",
+          title: "Direlands Extraction — Jogo 3D Web",
+          category: "desenvolvimento",
+          categoryLabel: "Desenvolvimento Web & Programação",
+          image: "direlands.png",
+          featured: true,
+          badge: "Destaque Real",
+          summary: "Jogo 3D completo em primeira pessoa rodando no navegador com Three.js, combates contra chefes, missões e progressão modular.",
+          fullDescription: "Desenvolvido com JavaScript puro e a biblioteca Three.js, o Direlands Extraction é uma experiência imersiva 3D no navegador. Conta com controles PointerLock, geração de cenários, sistema de combate contra chefes (boss.js), árvore de progressão e missões (quest.js), além de efeitos sonoros e interface de usuário integrada.",
+          technologies: ["Three.js", "JavaScript", "HTML5 Canvas", "CSS3", "WebGL"],
+          type: "Projeto de Desenvolvimento Web / 3D"
+        },
+        {
+          id: "smartfit-api",
+          title: "SmartFit Management — API Backend",
+          category: "programacao",
+          categoryLabel: "Programação & Arquitetura",
+          image: null,
+          iconType: "server",
+          featured: false,
+          badge: "Backend & MVC",
+          summary: "Arquitetura RESTful com separação clara de responsabilidades em Models, Controllers e Rotas para gestão de dados.",
+          fullDescription: "Projeto backend implementando o padrão de arquitetura Model-View-Controller (MVC). Apresenta módulos desacoplados para controle de alunos e registros, com tratamento de requisições, rotas estruturadas e manipulação de dados para servir aplicações cliente.",
+          technologies: ["Python", "REST API", "MVC Architecture", "Modular Design"],
+          type: "Projeto de Programação Backend"
+        },
+        {
+          id: "produto-java",
+          title: "Sistema de Gestão de Produtos em Java",
+          category: "programacao",
+          categoryLabel: "Programação Orientada a Objetos",
+          image: null,
+          iconType: "coffee",
+          featured: false,
+          badge: "Java POO",
+          summary: "Aplicação fundamentada em Programação Orientada a Objetos com encapsulamento rigoroso e regras de negócio.",
+          fullDescription: "Sistema construído em Java aplicando os pilares da POO: encapsulamento de atributos, construtores sobrecarregados, métodos de acesso e mutação, além de validação lógica de entradas e controle de fluxo do sistema.",
+          technologies: ["Java", "POO", "Encapsulamento", "Lógica de Negócios"],
+          type: "Projeto de Programação Java"
+        },
+        {
+          id: "foto-ensaio",
+          title: "Estudo de Composição Fotográfica",
+          category: "fotografia",
+          categoryLabel: "Fotografia",
+          image: null,
+          iconType: "camera",
+          featured: false,
+          badge: "Audiovisual",
+          summary: "Série prática explorando contraste de luz natural, profundidade de campo e geometria urbana.",
+          fullDescription: "Projeto prático do Curso de Fotografia explorando ângulos de visão, linhas guia, contraste luminoso e regra dos terços, registrando detalhes e perspectivas arquitetônicas.",
+          technologies: ["Fotografia Digital", "Enquadramento", "Iluminação Natural", "Pós-Produção"],
+          type: "Projeto de Fotografia"
+        },
+        {
+          id: "drone-captura",
+          title: "Captação Aérea e Cinemática com Drone",
+          category: "drone",
+          categoryLabel: "Pilotagem & Drone",
+          image: null,
+          iconType: "navigation",
+          featured: false,
+          badge: "Pilotagem",
+          summary: "Operações de voo com tomadas panorâmicas, movimentos orbitais suaves e captação de paisagens em alta resolução.",
+          fullDescription: "Registro e exercícios práticos de pilotagem de drone, aplicando manobras suaves de câmera aérea, controle de altitude, compensação de vento e segurança de voo.",
+          technologies: ["Pilotagem de Drone", "Captação Aérea", "Cinemática", "Estabilidade"],
+          type: "Projeto de Drone"
+        },
+        {
+          id: "novo-projeto-web",
+          title: "Novo Projeto Web em Desenvolvimento",
+          category: "desenvolvimento",
+          categoryLabel: "Desenvolvimento Web",
+          image: null,
+          iconType: "code",
+          featured: false,
+          badge: "Em Breve",
+          isPlaceholder: true,
+          summary: "Espaço reservado para o próximo projeto de aplicação web interativa em React que está em fase de planejamento.",
+          fullDescription: "Espaço preparado para acomodar os próximos passos da jornada como desenvolvedor, incluindo novas interfaces com React, integração com bancos de dados e ferramentas modernas.",
+          technologies: ["React", "JavaScript Moderno", "Tailwind CSS", "Em Breve"],
+          type: "Futuro Projeto"
+        }
+      ],
+      designReferences: [
+        {
+          name: "Rauno Freiberg Portfolio",
+          url: "https://rauno.me/",
+          award: "Awwwards Honorable Mention & SiteInspire",
+          colors: "Preto profundo (#0b0b0f), cinza titânio (#1c1c24) e violeta translúcido",
+          typography: "Inter / Geist com badges em JetBrains Mono",
+          layout: "Grid modular minimalista com dock inferior interativa",
+          motion: "Micro-interações suaves com sensibilidade ao cursor e sons sutis",
+          highlight: "O cuidado milimétrico em detalhes táteis e simplicidade funcional sem poluição."
+        },
+        {
+          name: "Dennis Snellenberg Portfolio",
+          url: "https://dennissnellenberg.com/",
+          award: "Awwwards Site of the Day & Site of the Year Nominee",
+          colors: "Fundo escuro fosco (#141517), grafite e roxo dinâmico",
+          typography: "Tipografia editorial com grande impacto nos títulos",
+          layout: "Seções fluidas com espaçamento generoso e cards dinâmicos",
+          motion: "Efeito magnético nos botões e revelação de cards com inércia",
+          highlight: "A sensação magnética envolvente ao passar o mouse sobre botões e links."
+        },
+        {
+          name: "Linear App Design System",
+          url: "https://linear.app/",
+          award: "Awwwards Site of the Day",
+          colors: "Preto absoluto (#08090a), superfícies escuras e violeta elétrico (#8b5cf6)",
+          typography: "Inter e Plus Jakarta Sans com legibilidade cirúrgica",
+          layout: "Bordas finas com glow gradiente e efeitos de aurora boreal no fundo",
+          motion: "Iluminação que segue o cursor e cards com efeito glassmorphism",
+          highlight: "A estética 'Dark Tech' de classe mundial com violeta elétrico."
+        },
+        {
+          name: "Paco Coursey Portfolio",
+          url: "https://paco.me/",
+          award: "SiteInspire Featured",
+          colors: "Preto grafite (#0e0e11), acentos em roxo neon e cinza médio",
+          typography: "Fira Code e tipografia sem serifa limpa",
+          layout: "Cards técnicos independentes e objetivos",
+          motion: "Transições instantâneas com feedback claro de estado",
+          highlight: "Apresentação honesta e madura de competências reais sem gráficos artificiais."
+        },
+        {
+          name: "Bruno Simon 3D Experience",
+          url: "https://bruno-simon.com/",
+          award: "Awwwards Site of the Year",
+          colors: "Fundos atmosféricos contrastantes com iluminação em roxo e neon",
+          typography: "Tipografia geométrica limpa e tecnológica",
+          layout: "Integração imersiva de WebGL/Three.js diretamente no navegador",
+          motion: "Física interativa e renderização fluida em tempo real",
+          highlight: "Demonstração prática do poder do Three.js para criar mundos 3D na web."
+        }
+      ]
+    };
+
+    // --- NAVBAR COMPONENT ---
+    function Navbar({ theme, toggleTheme, onOpenReferences }) {
+      const [isScrolled, setIsScrolled] = useState(false);
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+      useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      const navLinks = [
+        { name: 'Início', href: '#inicio' },
+        { name: 'Sobre Mim', href: '#sobre' },
+        { name: 'Habilidades', href: '#habilidades' },
+        { name: 'Projetos', href: '#projetos' },
+        { name: 'Contato', href: '#contato' },
+      ];
+
+      return (
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'py-3 backdrop-blur-xl bg-opacity-80 border-b border-purple-500/15 shadow-lg shadow-purple-950/10' 
+            : 'py-5 bg-transparent'
+        }`} style={{ backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              
+              {/* Logo / Monogram */}
+              <a href="#inicio" className="group flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300">
+                  GH
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-bold text-base tracking-tight leading-tight group-hover:text-purple-400 transition-colors">
+                    Gustavo Matiello
+                  </span>
+                  <span className="text-[11px] font-mono-code text-purple-400 opacity-90">
+                    dev // ti
+                  </span>
+                </div>
+              </a>
+
+              {/* Desktop Nav */}
+              <nav className="hidden md:flex items-center gap-1 bg-purple-950/20 dark:bg-purple-950/30 p-1.5 rounded-full border border-purple-500/20 backdrop-blur-md">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:text-purple-400 hover:bg-purple-500/10"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </nav>
+
+              {/* Desktop Actions */}
+              <div className="hidden md:flex items-center gap-3">
+                <button
+                  onClick={onOpenReferences}
+                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono-code border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 transition-all duration-200"
+                  title="Ver Referências de Design Awwwards e SiteInspire"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                  Referências Awwwards
+                </button>
+
+                <button
+                  onClick={toggleTheme}
+                  className="p-2.5 rounded-xl border border-purple-500/20 hover:border-purple-500/50 bg-purple-500/10 hover:bg-purple-500/20 transition-all duration-200 text-purple-300"
+                  aria-label="Alternar tema"
+                  title={theme === 'dark' ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro'}
+                >
+                  {theme === 'dark' ? (
+                    <svg className="w-4 h-4 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                  )}
+                </button>
+
+                <a
+                  href={`https://wa.me/${portfolioData.personal.phoneRaw}?text=Ol%C3%A1%20Gustavo%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                >
+                  <span>WhatsApp</span>
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Mobile Menu Toggle */}
+              <div className="flex md:hidden items-center gap-2">
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-300"
+                >
+                  {theme === 'dark' ? '☀️' : '🌙'}
+                </button>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-300 focus:outline-none"
+                >
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {mobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Mobile Dropdown */}
+            {mobileMenuOpen && (
+              <div className="md:hidden mt-3 p-4 rounded-2xl glass-panel flex flex-col gap-2 border border-purple-500/30">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-purple-500/10 hover:text-purple-400 transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <div className="pt-2 border-t border-purple-500/20 flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenReferences();
+                    }}
+                    className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-mono-code bg-purple-500/10 text-purple-300 border border-purple-500/30"
+                  >
+                    ✨ Referências Awwwards & SiteInspire
+                  </button>
+                  <a
+                    href={`https://wa.me/${portfolioData.personal.phoneRaw}?text=Ol%C3%A1%20Gustavo%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-center px-4 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
+                  >
+                    Falar pelo WhatsApp
+                  </a>
+                </div>
+              </div>
+            )}
+
+          </div>
+        </header>
+      );
+    }
+
+    // --- HERO COMPONENT ---
+    function Hero({ personal }) {
+      return (
+        <section id="inicio" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
+          <div className="ambient-glow-1 top-10 -left-20"></div>
+          <div className="ambient-glow-2 bottom-10 -right-20"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              
+              {/* Left Column (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+                
+                {/* Status Badge */}
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-md mb-6 hover:border-purple-500/50 transition-all duration-300">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-xs font-mono-code text-purple-300 tracking-wide font-medium">
+                    {personal.statusBadge}
+                  </span>
+                </div>
+
+                {/* Main Headline */}
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-5">
+                  Olá, eu sou <br className="hidden sm:inline" />
+                  <span className="text-gradient-purple drop-shadow-sm">
+                    {personal.name}
+                  </span>
+                </h1>
+
+                {/* Short Tagline */}
+                <div className="text-lg sm:text-xl font-medium text-purple-300/90 mb-4 font-mono-code flex items-center gap-2">
+                  <span className="text-purple-400">&gt;</span>
+                  <span>{personal.role}</span>
+                </div>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg text-slate-400 dark:text-slate-300/80 max-w-2xl leading-relaxed mb-8">
+                  Jovem de 17 anos apaixonado por tecnologia, desenvolvimento web, programação em Java e React, montagem de computadores, fotografia e pilotagem de drones. Focado em aprender continuamente e construir projetos modernos de alto nível.
+                </p>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
+                  <a
+                    href="#projetos"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 text-white shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 group"
+                  >
+                    <span>Conhecer Projetos</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="#contato"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-sm border border-purple-500/30 hover:border-purple-500/60 bg-purple-950/20 hover:bg-purple-900/30 text-purple-200 hover:text-white backdrop-blur-md transition-all duration-200 flex items-center justify-center gap-2"
+                  >
+                    <span>Entrar em Contato</span>
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href={`https://wa.me/${personal.phoneRaw}?text=Ol%C3%A1%20Gustavo%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-5 py-3.5 rounded-xl font-semibold text-sm border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all duration-200 flex items-center justify-center gap-2"
+                    title="Conversar diretamente pelo WhatsApp"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z" />
+                    </svg>
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+
+                {/* Quick Info Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 pt-8 border-t border-purple-500/15 w-full">
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono-code text-purple-400">17 anos</span>
+                    <span className="text-xs text-slate-400">Idade</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono-code text-purple-400">Ensino Médio</span>
+                    <span className="text-xs text-slate-400">Ênfase em TI</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono-code text-purple-400">2027</span>
+                    <span className="text-xs text-slate-400">Previsão Conclusão</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono-code text-purple-400">Campinas</span>
+                    <span className="text-xs text-slate-400">São Paulo</span>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column: Profile Photo in Highlight (5 cols) */}
+              <div className="lg:col-span-5 flex justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 to-indigo-600/20 rounded-full blur-3xl transform scale-95 pointer-events-none"></div>
+
+                <div className="relative group">
+                  {/* Outer Aurora Ring */}
+                  <div className="photo-glow-ring p-1.5 shadow-2xl shadow-purple-600/30">
+                    <div className="relative rounded-full overflow-hidden bg-slate-900 w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 border-4 border-slate-950">
+                      <img
+                        src={personal.avatar}
+                        alt={personal.name}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Floating Badges */}
+                  <div className="absolute -bottom-3 -right-2 sm:right-0 glass-panel px-4 py-2.5 rounded-2xl border border-purple-500/30 shadow-xl flex items-center gap-3 animate-bounce" style={{ animationDuration: '4s' }}>
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-mono-code text-sm font-bold">
+                      &lt;/&gt;
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="text-xs font-bold leading-tight">Desenvolvedor</span>
+                      <span className="text-[10px] text-slate-400 font-mono-code">React & Java</span>
+                    </div>
+                  </div>
+
+                  <div className="absolute -top-3 -left-2 sm:left-0 glass-panel px-3.5 py-2 rounded-2xl border border-purple-500/30 shadow-xl flex items-center gap-2">
+                    <span className="text-base">📍</span>
+                    <div className="flex flex-col text-left">
+                      <span className="text-xs font-semibold leading-tight">Campinas, SP</span>
+                      <span className="text-[10px] text-purple-400 font-mono-code">Brasil</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // --- ABOUT COMPONENT ---
+    function About({ personal, academic, courses }) {
+      return (
+        <section id="sobre" className="relative py-24 border-t border-purple-500/15 overflow-hidden">
+          <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            {/* Header */}
+            <div className="flex flex-col items-center text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-mono-code text-purple-300 mb-3">
+                <span>01 // TRAJETÓRIA & PERFIL</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                Sobre <span className="text-gradient-purple">Mim</span>
+              </h2>
+              <p className="text-slate-400 max-w-xl text-base sm:text-lg">
+                Conheça minha história, formação acadêmica, qualificações e a dedicação que impulsiona minha jornada em Tecnologia da Informação.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col gap-6">
+                
+                {/* Bio Card */}
+                <div className="glass-panel p-8 rounded-3xl relative overflow-hidden">
+                  <div className="flex items-center gap-3 mb-6 pb-4 border-b border-purple-500/15">
+                    <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+                      👋
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">Apresentação Pessoal</h3>
+                      <span className="text-xs font-mono-code text-purple-400">17 anos • Campinas, SP</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 text-slate-300 text-base leading-relaxed">
+                    <p>
+                      Meu nome é <strong className="text-white font-semibold">Gustavo Henrique Barros Matiello</strong>, tenho 17 anos e atualmente estou cursando o <strong className="text-purple-300 font-semibold">Ensino Médio com ênfase em Tecnologia da Informação</strong> no <strong className="text-white">Colégio Raphael Di Santo</strong>.
+                    </p>
+                    <p>
+                      Também estou estudando <strong className="text-purple-300 font-semibold">inglês</strong> para ampliar minhas habilidades linguísticas e profissionais, entendendo a importância da língua para documentações e o mercado global de tecnologia.
+                    </p>
+                    <p>
+                      Tenho interesse genuíno em tecnologia, programação, desenvolvimento web, montagem e manutenção de computadores, fotografia, edição de vídeos e pilotagem de drones. Sou uma pessoa <span className="text-white font-medium underline decoration-purple-500 decoration-2 underline-offset-4">responsável, dedicada, organizada e com comprovada facilidade para aprender novas tecnologias</span>.
+                    </p>
+                  </div>
+
+                  {/* Personality Traits */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 pt-6 border-t border-purple-500/15">
+                    <div className="p-3 rounded-2xl bg-purple-950/20 border border-purple-500/20 flex flex-col items-center text-center">
+                      <span className="text-xl mb-1">🎯</span>
+                      <span className="text-xs font-semibold text-white">Responsável</span>
+                      <span className="text-[10px] text-slate-400">Comprometido</span>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-purple-950/20 border border-purple-500/20 flex flex-col items-center text-center">
+                      <span className="text-xl mb-1">⚡</span>
+                      <span className="text-xs font-semibold text-white">Dedicado</span>
+                      <span className="text-[10px] text-slate-400">Foco contínuo</span>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-purple-950/20 border border-purple-500/20 flex flex-col items-center text-center">
+                      <span className="text-xl mb-1">📋</span>
+                      <span className="text-xs font-semibold text-white">Organizado</span>
+                      <span className="text-[10px] text-slate-400">Método e ordem</span>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-purple-950/20 border border-purple-500/20 flex flex-col items-center text-center">
+                      <span className="text-xl mb-1">🚀</span>
+                      <span className="text-xs font-semibold text-white">Ágil</span>
+                      <span className="text-[10px] text-slate-400">Fácil aprendizado</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Professional Objective */}
+                <div className="glass-panel p-7 rounded-3xl relative overflow-hidden border-l-4 border-l-purple-500">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-mono-code uppercase tracking-wider text-purple-400 font-bold">
+                      // Objetivo Profissional
+                    </span>
+                  </div>
+                  <blockquote className="text-lg text-slate-100 italic leading-snug">
+                    "{personal.objective}"
+                  </blockquote>
+                </div>
+
+              </div>
+
+              {/* Right Column (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                
+                {/* Academic Card */}
+                <div className="glass-panel p-7 rounded-3xl relative">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+                      🎓
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Formação Acadêmica</h3>
+                      <span className="text-xs font-mono-code text-purple-400">Ensino Médio Técnico</span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/25">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h4 className="font-bold text-base text-white">{academic.institution}</h4>
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-mono-code bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        {academic.status}
+                      </span>
+                    </div>
+                    <p className="text-purple-300 text-sm font-medium mb-3">
+                      {academic.degree}
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-xs font-mono-code text-slate-400 mb-3 bg-purple-950/40 px-3 py-1.5 rounded-lg border border-purple-500/20">
+                      <span>📅</span>
+                      <span>{academic.completionYear}</span>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {academic.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Courses Card */}
+                <div className="glass-panel p-7 rounded-3xl relative">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+                      📜
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Cursos & Qualificações</h3>
+                      <span className="text-xs font-mono-code text-purple-400">Certificações e Estudos</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3.5">
+                    {courses.map((course, idx) => (
+                      <div 
+                        key={idx}
+                        className="p-3.5 rounded-2xl bg-purple-950/15 border border-purple-500/15 hover:border-purple-500/40 transition-colors"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <h4 className="text-sm font-semibold text-white flex items-center gap-2">
+                            <span>{course.icon}</span>
+                            {course.title}
+                          </h4>
+                          <span className="text-[10px] font-mono-code px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20 whitespace-nowrap">
+                            {course.category}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-400 leading-relaxed pl-6">
+                          {course.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // --- SKILLS COMPONENT ---
+    function Skills({ categories }) {
+      const [activeTab, setActiveTab] = useState('all');
+
+      const filteredCategories = activeTab === 'all' 
+        ? categories 
+        : categories.filter(c => c.id === activeTab);
+
+      return (
+        <section id="habilidades" className="relative py-24 border-t border-purple-500/15 overflow-hidden">
+          <div className="ambient-glow-2 top-20 right-10"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            {/* Header */}
+            <div className="flex flex-col items-center text-center mb-14">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-mono-code text-purple-300 mb-3">
+                <span>02 // COMPETÊNCIAS & DOMÍNIO</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                Minhas <span className="text-gradient-purple">Habilidades</span>
+              </h2>
+              <p className="text-slate-400 max-w-2xl text-base sm:text-lg">
+                Habilidades práticas em desenvolvimento de software, montagem de hardware e produção multimídia, apresentadas com fidelidade e sem métricas arbitrárias.
+              </p>
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+              <button
+                onClick={() => setActiveTab('all')}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
+                  activeTab === 'all'
+                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 border border-purple-500'
+                    : 'glass-panel text-slate-300 hover:text-white'
+                }`}
+              >
+                Todas as Áreas
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
+                    activeTab === cat.id
+                      ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 border border-purple-500'
+                      : 'glass-panel text-slate-300 hover:text-white'
+                  }`}
+                >
+                  {cat.name.split('&')[0].trim()}
+                </button>
+              ))}
+            </div>
+
+            {/* Skills Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {filteredCategories.map((category) => (
+                <div 
+                  key={category.id} 
+                  className="glass-panel p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-purple-500/15">
+                      <div>
+                        <span className="text-[11px] font-mono-code text-purple-400 uppercase tracking-wider block mb-1">
+                          {category.badge}
+                        </span>
+                        <h3 className="text-xl font-bold text-white">
+                          {category.name}
+                        </h3>
+                      </div>
+                      <div className="w-10 h-10 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-300 font-mono-code text-sm font-bold">
+                        {category.skills.length}
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+                      {category.description}
+                    </p>
+
+                    <div className="space-y-4">
+                      {category.skills.map((skill, sIdx) => (
+                        <div 
+                          key={sIdx}
+                          className="p-4 rounded-2xl bg-purple-950/20 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-200"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-purple-400"></span>
+                              {skill.name}
+                            </h4>
+                            <span className="text-[10px] font-mono-code text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+                              Prático
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-400 leading-relaxed mb-3">
+                            {skill.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {skill.tags.map((tag, tIdx) => (
+                              <span 
+                                key={tIdx}
+                                className="text-[10px] font-mono-code px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-purple-500/10 flex items-center justify-between text-[11px] font-mono-code text-slate-500">
+                    <span>Habilidade certificada / prática</span>
+                    <span className="text-purple-400">Conhecimento aplicado ✓</span>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // --- PROJECTS COMPONENT ---
+    function Projects({ projects }) {
+      const [activeCategory, setActiveCategory] = useState('all');
+      const [selectedProject, setSelectedProject] = useState(null);
+
+      const categories = [
+        { id: 'all', label: 'Todos os Projetos' },
+        { id: 'desenvolvimento', label: 'Desenvolvimento Web' },
+        { id: 'programacao', label: 'Programação' },
+        { id: 'fotografia', label: 'Fotografia' },
+        { id: 'drone', label: 'Drone & Aéreo' },
+      ];
+
+      const filteredProjects = activeCategory === 'all'
+        ? projects
+        : projects.filter(p => p.category === activeCategory);
+
+      return (
+        <section id="projetos" className="relative py-24 border-t border-purple-500/15 overflow-hidden">
+          <div className="ambient-glow-1 bottom-10 left-10"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            {/* Header */}
+            <div className="flex flex-col items-center text-center mb-14">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-mono-code text-purple-300 mb-3">
+                <span>03 // PORTFÓLIO & PRÁTICA</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                Meus <span className="text-gradient-purple">Projetos</span>
+              </h2>
+              <p className="text-slate-400 max-w-2xl text-base sm:text-lg">
+                Aplicações web interativas, códigos em Java e backend, produções fotográficas e operações com drone.
+              </p>
+            </div>
+
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium transition-all duration-200 ${
+                    activeCategory === cat.id
+                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30 scale-105'
+                      : 'glass-panel text-slate-300 hover:text-white'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <div
+                  key={project.id}
+                  onClick={() => setSelectedProject(project)}
+                  className={`group glass-panel rounded-3xl overflow-hidden cursor-pointer flex flex-col justify-between transition-all duration-300 ${
+                    project.isPlaceholder 
+                      ? 'border-dashed border-purple-500/30 hover:border-purple-500/60' 
+                      : 'hover:-translate-y-2'
+                  }`}
+                >
+                  <div>
+                    {/* Visual Area */}
+                    <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-950 flex items-center justify-center">
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-purple-950/40 via-slate-900 to-slate-950 flex flex-col items-center justify-center p-6 text-center">
+                          <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-2xl text-purple-300 mb-2 group-hover:scale-110 transition-transform">
+                            {project.iconType === 'server' && '⚙️'}
+                            {project.iconType === 'coffee' && '☕'}
+                            {project.iconType === 'camera' && '📸'}
+                            {project.iconType === 'navigation' && '🛸'}
+                            {project.iconType === 'code' && '⚡'}
+                            {!project.iconType && '💻'}
+                          </div>
+                          <span className="text-xs font-mono-code text-purple-400">
+                            {project.categoryLabel}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="absolute top-3.5 right-3.5">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono-code font-bold uppercase tracking-wider backdrop-blur-md bg-purple-950/80 border border-purple-500/40 text-purple-300 shadow-md">
+                          {project.badge}
+                        </span>
+                      </div>
+
+                      {project.isPlaceholder && (
+                        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] flex items-center justify-center">
+                          <span className="px-4 py-2 rounded-xl text-xs font-mono-code bg-purple-600/30 border border-purple-500/50 text-purple-200">
+                            Espaço para Futuro Projeto
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="text-[11px] font-mono-code text-purple-400 mb-1">
+                        {project.type}
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                        {project.summary}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        {project.technologies.map((tech, idx) => (
+                          <span
+                            key={idx}
+                            className="text-[10px] font-mono-code px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div className="p-6 pt-0">
+                    <button className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold border border-purple-500/30 hover:border-purple-500/60 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 flex items-center justify-center gap-2 group-hover:bg-purple-600 group-hover:text-white transition-all duration-200">
+                      <span>Ver Detalhes do Projeto</span>
+                      <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Modal */}
+          {selectedProject && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+              <div className="relative w-full max-w-2xl glass-panel p-6 sm:p-8 rounded-3xl border border-purple-500/40 shadow-2xl overflow-y-auto max-h-[90vh]">
+                
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-5 right-5 p-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+
+                {selectedProject.image && (
+                  <div className="h-56 w-full rounded-2xl overflow-hidden mb-6 border border-purple-500/30">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono-code bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                    {selectedProject.badge}
+                  </span>
+                  <span className="text-xs font-mono-code text-slate-400">
+                    {selectedProject.type}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  {selectedProject.title}
+                </h3>
+
+                <div className="prose prose-invert max-w-none text-slate-300 text-sm leading-relaxed mb-6 space-y-3">
+                  <p>{selectedProject.fullDescription}</p>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-xs font-mono-code uppercase tracking-wider text-purple-400 mb-2 font-bold">
+                    Tecnologias & Ferramentas:
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((t, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 rounded-lg text-xs font-mono-code bg-purple-500/15 border border-purple-500/30 text-purple-300"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-purple-500/20">
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-purple-600 text-white hover:bg-purple-500 transition-colors"
+                  >
+                    Fechar Detalhes
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </section>
+      );
+    }
+
+    // --- CONTACT COMPONENT ---
+    function Contact({ personal }) {
+      const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+
+      const [errors, setErrors] = useState({});
+      const [isSubmitting, setIsSubmitting] = useState(false);
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [copiedItem, setCopiedItem] = useState(null);
+
+      const validate = () => {
+        const errs = {};
+        if (!formData.name.trim()) errs.name = 'Por favor, informe seu nome.';
+        if (!formData.email.trim()) {
+          errs.email = 'Por favor, informe seu e-mail.';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+          errs.email = 'Por favor, informe um e-mail válido.';
+        }
+        if (!formData.subject.trim()) errs.subject = 'Por favor, informe o assunto.';
+        if (!formData.message.trim()) errs.message = 'Por favor, escreva sua mensagem.';
+        return errs;
+      };
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (errors[name]) {
+          setErrors(prev => ({ ...prev, [name]: null }));
+        }
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+          setErrors(validationErrors);
+          return;
+        }
+
+        setIsSubmitting(true);
+        setTimeout(() => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+          setTimeout(() => setIsSubmitted(false), 6000);
+        }, 1200);
+      };
+
+      const handleSendViaWhatsApp = () => {
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+          setErrors(validationErrors);
+          return;
+        }
+
+        const text = encodeURIComponent(
+          `Olá Gustavo! Meu nome é ${formData.name} (${formData.email}).\n\nAssunto: ${formData.subject}\n\nMensagem: ${formData.message}`
+        );
+        window.open(`https://wa.me/${personal.phoneRaw}?text=${text}`, '_blank');
+      };
+
+      const copyToClipboard = (text, type) => {
+        navigator.clipboard.writeText(text);
+        setCopiedItem(type);
+        setTimeout(() => setCopiedItem(null), 2500);
+      };
+
+      return (
+        <section id="contato" className="relative py-24 border-t border-purple-500/15 overflow-hidden">
+          <div className="ambient-glow-2 top-10 left-1/3"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            {/* Header */}
+            <div className="flex flex-col items-center text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-mono-code text-purple-300 mb-3">
+                <span>04 // CONEXÃO & COMUNICAÇÃO</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                Entre em <span className="text-gradient-purple">Contato</span>
+              </h2>
+              <p className="text-slate-400 max-w-xl text-base sm:text-lg">
+                Tem uma oportunidade, projeto ou quer bater um papo sobre tecnologia? Fique à vontade para me mandar uma mensagem.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              
+              {/* Left Column (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                
+                {/* Quick WhatsApp Action Card */}
+                <div className="glass-panel p-7 rounded-3xl relative overflow-hidden bg-gradient-to-br from-purple-950/40 via-purple-900/20 to-transparent border border-purple-500/30">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-2xl">
+                      💬
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">Conversa Rápida</h3>
+                      <span className="text-xs font-mono-code text-emerald-400">Resposta Direta</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                    Precisa de um retorno ágil? Inicie uma conversa diretamente no meu WhatsApp com um clique.
+                  </p>
+                  <a
+                    href={`https://wa.me/${personal.phoneRaw}?text=Ol%C3%A1%20Gustavo%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-5 rounded-2xl font-semibold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2.5"
+                  >
+                    <span>Falar no WhatsApp Agora</span>
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z" />
+                    </svg>
+                  </a>
+                </div>
+
+                {/* Details List */}
+                <div className="glass-panel p-7 rounded-3xl space-y-4">
+                  <h3 className="text-base font-bold text-white mb-4 pb-2 border-b border-purple-500/15">
+                    Informações de Contato
+                  </h3>
+
+                  {/* Email */}
+                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-purple-950/20 border border-purple-500/15">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400">
+                        ✉️
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono-code text-slate-400 block">E-mail</span>
+                        <a
+                          href={`mailto:${personal.email}`}
+                          className="text-xs sm:text-sm font-medium text-white hover:text-purple-400 transition-colors"
+                        >
+                          {personal.email}
+                        </a>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(personal.email, 'email')}
+                      className="px-2.5 py-1 rounded-lg text-[10px] font-mono-code bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/20 transition-colors"
+                      title="Copiar e-mail"
+                    >
+                      {copiedItem === 'email' ? 'Copiado!' : 'Copiar'}
+                    </button>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-purple-950/20 border border-purple-500/15">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400">
+                        📞
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono-code text-slate-400 block">Telefone / WhatsApp</span>
+                        <a
+                          href={`https://wa.me/${personal.phoneRaw}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs sm:text-sm font-medium text-white hover:text-purple-400 transition-colors"
+                        >
+                          {personal.phone}
+                        </a>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(personal.phone, 'phone')}
+                      className="px-2.5 py-1 rounded-lg text-[10px] font-mono-code bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/20 transition-colors"
+                      title="Copiar telefone"
+                    >
+                      {copiedItem === 'phone' ? 'Copiado!' : 'Copiar'}
+                    </button>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-purple-950/20 border border-purple-500/15">
+                    <div className="w-9 h-9 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400 mt-0.5">
+                      📍
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono-code text-slate-400 block">Localização</span>
+                      <span className="text-xs sm:text-sm font-medium text-white">
+                        {personal.location}
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Right Column: Form (7 cols) */}
+              <div className="lg:col-span-7">
+                <div className="glass-panel p-8 sm:p-10 rounded-3xl relative">
+                  
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-purple-500/15">
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Envie uma Mensagem</h3>
+                      <span className="text-xs font-mono-code text-purple-400">Formulário de Contato Direto</span>
+                    </div>
+                    <span className="text-xs font-mono-code text-slate-400">
+                      Tempo estimado: 1 min
+                    </span>
+                  </div>
+
+                  {isSubmitted && (
+                    <div className="mb-6 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm flex items-center gap-3 animate-fadeIn">
+                      <span className="text-xl">✅</span>
+                      <div>
+                        <strong className="block font-semibold">Mensagem enviada com sucesso!</strong>
+                        <span className="text-xs text-emerald-200">Muito obrigado pelo contato, Gustavo responderá em breve.</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-mono-code text-slate-300 mb-1.5">
+                          Seu Nome Completo *
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Ex: Carlos Silva"
+                          className={`w-full px-4 py-3 rounded-xl bg-purple-950/20 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                            errors.name ? 'border-rose-500/80' : 'border-purple-500/25 focus:border-purple-500'
+                          }`}
+                        />
+                        {errors.name && <span className="text-[11px] text-rose-400 mt-1 block">{errors.name}</span>}
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-mono-code text-slate-300 mb-1.5">
+                          Seu E-mail *
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Ex: carlos@email.com"
+                          className={`w-full px-4 py-3 rounded-xl bg-purple-950/20 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                            errors.email ? 'border-rose-500/80' : 'border-purple-500/25 focus:border-purple-500'
+                          }`}
+                        />
+                        {errors.email && <span className="text-[11px] text-rose-400 mt-1 block">{errors.email}</span>}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono-code text-slate-300 mb-1.5">
+                        Assunto da Mensagem *
+                      </label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="Ex: Oportunidade de Estágio / Projeto Web"
+                        className={`w-full px-4 py-3 rounded-xl bg-purple-950/20 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                          errors.subject ? 'border-rose-500/80' : 'border-purple-500/25 focus:border-purple-500'
+                        }`}
+                      />
+                      {errors.subject && <span className="text-[11px] text-rose-400 mt-1 block">{errors.subject}</span>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono-code text-slate-300 mb-1.5">
+                        Mensagem *
+                      </label>
+                      <textarea
+                        rows={4}
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Escreva sua mensagem ou detalhes sobre a oportunidade..."
+                        className={`w-full px-4 py-3 rounded-xl bg-purple-950/20 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                          errors.message ? 'border-rose-500/80' : 'border-purple-500/25 focus:border-purple-500'
+                        }`}
+                      ></textarea>
+                      {errors.message && <span className="text-[11px] text-rose-400 mt-1 block">{errors.message}</span>}
+                    </div>
+
+                    <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex-1 py-3.5 px-6 rounded-xl font-semibold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                            <span>Processando...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Enviar Mensagem</span>
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleSendViaWhatsApp}
+                        className="py-3.5 px-5 rounded-xl font-semibold text-sm border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all flex items-center justify-center gap-2"
+                        title="Preencher e enviar diretamente pelo WhatsApp"
+                      >
+                        <span>Enviar via WhatsApp</span>
+                        <span className="text-base">📲</span>
+                      </button>
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // --- REFERENCES MODAL COMPONENT ---
+    function ReferencesModal({ isOpen, onClose, references }) {
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-4xl glass-panel p-6 sm:p-10 rounded-3xl border border-purple-500/40 shadow-2xl overflow-y-auto max-h-[90vh]">
+            
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 p-2.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 transition-colors"
+              aria-label="Fechar modal"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="mb-8 pb-4 border-b border-purple-500/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono-code bg-purple-500/15 border border-purple-500/30 text-purple-300 mb-2">
+                <span>AWWWARDS & SITEINSPIRE</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Documento de Referências Visuais de Design
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">
+                Pesquisa aprofundada de 5 referências internacionais premiadas utilizadas para guiar a identidade visual, tipografia, paleta e arquitetura deste portfólio.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              {references.map((ref, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-2xl bg-purple-950/20 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-200"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-3">
+                      <span className="w-7 h-7 rounded-xl bg-purple-500/20 text-purple-400 font-mono-code text-xs font-bold flex items-center justify-center">
+                        0{idx + 1}
+                      </span>
+                      <h4 className="text-lg font-bold text-white">
+                        {ref.name}
+                      </h4>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono-code px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                        {ref.award}
+                      </span>
+                      <a
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-mono-code text-purple-400 hover:text-purple-300 underline flex items-center gap-1"
+                      >
+                        <span>Acessar</span>
+                        <span>↗</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mt-4 pt-4 border-t border-purple-500/10">
+                    <div>
+                      <strong className="text-purple-300 font-mono-code block mb-1">Cores Utilizadas:</strong>
+                      <span className="text-slate-300">{ref.colors}</span>
+                    </div>
+                    <div>
+                      <strong className="text-purple-300 font-mono-code block mb-1">Tipografia:</strong>
+                      <span className="text-slate-300">{ref.typography}</span>
+                    </div>
+                    <div>
+                      <strong className="text-purple-300 font-mono-code block mb-1">Organização do Layout:</strong>
+                      <span className="text-slate-300">{ref.layout}</span>
+                    </div>
+                    <div>
+                      <strong className="text-purple-300 font-mono-code block mb-1">Animações & Navegação:</strong>
+                      <span className="text-slate-300">{ref.motion}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-purple-500/10 bg-purple-950/30 p-3 rounded-xl">
+                    <strong className="text-emerald-400 font-mono-code text-[11px] block mb-1">
+                      💡 O que chamou a atenção:
+                    </strong>
+                    <p className="text-xs text-slate-300 leading-relaxed italic">
+                      "{ref.highlight}"
+                    </p>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-purple-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span className="text-xs text-slate-400 font-mono-code">
+                Arquivo de documentação disponível em: REFERENCIAS_VISUAIS.md
+              </span>
+              <button
+                onClick={onClose}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-semibold bg-purple-600 text-white hover:bg-purple-500 transition-colors"
+              >
+                Fechar Janela
+              </button>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    // --- FOOTER COMPONENT ---
+    function Footer({ personal, onOpenReferences }) {
+      const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      return (
+        <footer className="relative py-12 border-t border-purple-500/15 bg-slate-950/60 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-purple-500/10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-purple-500/25">
+                  GH
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-base leading-tight">
+                    {personal.name}
+                  </h4>
+                  <p className="text-xs text-slate-400 font-mono-code">
+                    {personal.role}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+                <a href="#inicio" className="hover:text-purple-400 transition-colors">Início</a>
+                <a href="#sobre" className="hover:text-purple-400 transition-colors">Sobre</a>
+                <a href="#habilidades" className="hover:text-purple-400 transition-colors">Habilidades</a>
+                <a href="#projetos" className="hover:text-purple-400 transition-colors">Projetos</a>
+                <a href="#contato" className="hover:text-purple-400 transition-colors">Contato</a>
+                <button
+                  onClick={onOpenReferences}
+                  className="text-purple-400 hover:text-purple-300 font-mono-code underline underline-offset-4"
+                >
+                  Referências de Design
+                </button>
+              </div>
+
+              <button
+                onClick={scrollToTop}
+                className="p-3 rounded-2xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300 hover:text-white transition-all flex items-center gap-2 text-xs font-mono-code"
+                title="Voltar ao Topo"
+              >
+                <span>Topo</span>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+              <p>© {new Date().getFullYear()} Gustavo Henrique Barros Matiello. Todos os direitos reservados.</p>
+              <div className="flex items-center gap-2 font-mono-code">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                <span>Desenvolvido com React, HTML5, CSS3 & JavaScript</span>
+              </div>
+            </div>
+
+          </div>
+        </footer>
+      );
+    }
+
+    // --- MAIN APP COMPONENT ---
+    function App() {
+      const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('theme') || 'dark';
+      });
+
+      const [isReferencesOpen, setIsReferencesOpen] = useState(false);
+
+      useEffect(() => {
+        const root = document.documentElement;
+        if (theme === 'dark') {
+          root.classList.add('dark');
+          root.classList.remove('light');
+        } else {
+          root.classList.add('light');
+          root.classList.remove('dark');
+        }
+        localStorage.setItem('theme', theme);
+      }, [theme]);
+
+      const toggleTheme = () => {
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col selection:bg-purple-500 selection:text-white">
+          <Navbar
+            theme={theme}
+            toggleTheme={toggleTheme}
+            onOpenReferences={() => setIsReferencesOpen(true)}
+          />
+
+          <main className="flex-1">
+            <Hero personal={portfolioData.personal} />
+            <About
+              personal={portfolioData.personal}
+              academic={portfolioData.academic}
+              courses={portfolioData.courses}
+            />
+            <Skills categories={portfolioData.skillCategories} />
+            <Projects projects={portfolioData.projects} />
+            <Contact personal={portfolioData.personal} />
+          </main>
+
+          <Footer
+            personal={portfolioData.personal}
+            onOpenReferences={() => setIsReferencesOpen(true)}
+          />
+
+          <ReferencesModal
+            isOpen={isReferencesOpen}
+            onClose={() => setIsReferencesOpen(false)}
+            references={portfolioData.designReferences}
+          />
+        </div>
+      );
+    }
+
+    // Render App
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
+
+</body>
+</html>
